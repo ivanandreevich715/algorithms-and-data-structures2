@@ -1,1 +1,48 @@
+#include <iostream>
+using namespace std;
 
+void SelectionSort(int A[], int n)
+{
+    for (int i = 0; i < n - 1; i++)
+    {
+        int maxIndex = i;
+
+        // Ищем максимальный элемент среди оставшихся
+        for (int j = i + 1; j < n; j++)
+        {
+            if (A[j] > A[maxIndex])
+            {
+                maxIndex = j;
+            }
+        }
+
+        // Меняем местами
+        int temp = A[i];
+        A[i] = A[maxIndex];
+        A[maxIndex] = temp;
+    }
+}
+
+int main()
+{
+    int A[1000];
+    int n = 0;
+
+    // Читаем числа до конца входных данных
+    while (cin >> A[n])
+    {
+        n++;
+    }
+
+    SelectionSort(A, n);
+
+    for (int i = 0; i < n; i++)
+    {
+        cout << A[i];
+
+        if (i < n - 1)
+            cout << " ";
+    }
+
+    return 0;
+}
