@@ -1,0 +1,49 @@
+#include <iostream>
+using namespace std;
+
+void CountSort(int A[], int n)
+{
+    int count[101] = {0};
+
+    // Считаем, сколько раз встречается каждое число
+    for (int i = 0; i < n; i++)
+    {
+        count[A[i]]++;
+    }
+
+    int k = 0;
+
+    // Записываем числа обратно в массив
+    for (int value = 0; value <= 100; value++)
+    {
+        while (count[value] > 0)
+        {
+            A[k] = value;
+            k++;
+            count[value]--;
+        }
+    }
+}
+
+int main()
+{
+    int A[200000];
+    int n = 0;
+
+    while (cin >> A[n])
+    {
+        n++;
+    }
+
+    CountSort(A, n);
+
+    for (int i = 0; i < n; i++)
+    {
+        cout << A[i];
+
+        if (i < n - 1)
+            cout << " ";
+    }
+
+    return 0;
+}
