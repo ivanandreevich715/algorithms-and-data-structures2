@@ -1,0 +1,12 @@
+distances = list(map(int, input().split()))
+prices = list(map(int, input().split()))
+
+distances.sort()
+prices.sort(reverse=True)
+
+total = 0
+
+for i in range(len(distances)):
+    total += distances[i] * prices[i]
+
+print(total)
