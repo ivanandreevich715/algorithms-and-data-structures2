@@ -1,0 +1,88 @@
+#include <iostream>
+using namespace std;
+
+int temp[100000];
+
+void Merge(int A[], int left, int mid, int right)
+{
+    int i = left;
+    int j = mid + 1;
+    int k = left;
+
+    // Сливаем две отсортированные части
+    while (i <= mid && j <= right)
+    {
+        if (A[i] <= A[j])
+        {
+            temp[k] = A[i];
+            i++;
+        }
+        else
+        {
+            temp[k] = A[j];
+            j++;
+        }
+
+        k++;
+    }
+
+    // Если остались элементы в левой части
+    while (i <= mid)
+    {
+        temp[k] = A[i];
+        i++;
+        k++;
+    }
+
+    // Если остались элементы в правой части
+    while (j <= right)
+    {
+        temp[k] = A[j];
+        j++;
+        k++;
+    }
+
+    // Переносим результат обратно в A
+    for (int p = left; p <= right; p++)
+    {
+        A[p] = temp[p];
+    }
+}
+
+void MergeSort(int A[], int left, int right)
+{
+    if (left >= right)
+        return;
+
+    int mid = (left + right) / 2;
+
+    MergeSort(A, left, mid);
+    MergeSort(A, mid + 1, right);
+
+    Merge(A, left, mid, right);
+}
+
+int main()
+{
+    int n;
+    cin >> n;
+
+    int A[100000];
+
+    for (int i = 0; i < n; i++)
+    {
+        cin >> A[i];
+    }
+
+    MergeSort(A, 0, n - 1);
+
+    for (int i = 0; i < n; i++)
+    {
+        cout << A[i];
+
+        if (i < n - 1)
+            cout << " ";
+    }
+
+    return 0;
+}
